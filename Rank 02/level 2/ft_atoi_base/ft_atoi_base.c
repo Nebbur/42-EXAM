@@ -1,6 +1,3 @@
-#include <stdio.h>//
-#include <stdlib.h>//
-
 int		isvalid(char c, int base)
 {
 	char digits[17] = "0123456789abcdef";
