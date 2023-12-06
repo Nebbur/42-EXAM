@@ -1,36 +1,31 @@
-int		isvalid(char c, int base)
+int    isbase(char c, int str_base)
 {
-	char digits[17] = "0123456789abcdef";
-	char digits2[17] = "0123456789ABCDEF";
-
-	while (base--)
-		if (digits[base] == c || digits2[base] == c)
-			return (1);
-	return (0);
+    char base[17] = "0123456789abcdef";
+    char baseM[17] = "0123456789ABCDEF";
+    while (str_base--)
+        if (base[str_base] == c || baseM[str_base] == c)
+            return (1);
+    return (0);
 }
 
-int		value_of(char c)
+int     aux(char c, int str_base)
 {
-	if (c >= '0' && c <= '9')
-		return (c - '0');
-	else if (c >= 'a' && c <= 'f')
-		return (c - 'a' + 10);
-	else if (c >= 'A' && c <= 'F')
-		return (c - 'A' + 10);
-	return (0);
+    if (c <= '9' && c >= '0')
+        return (c - '0');
+    else if (c <= 'f' && c >= 'a')
+        return (c - 'a' + 10);
+    else if (c <= 'F' && c >= 'A')
+        return (c - 'A' + 10);
 }
-
-int		ft_atoi_base(const char *str, int str_base)
+#include <stdio.h>
+int	ft_atoi_base(const char *str, int str_base)
 {
-	int r;
-	int sg;
-
-	r = 0;
-	while (*str <= 32)
-		str++;
-	sg = (*str == '-') ? -1 : 1;
-	(*str == '-' || *str == '+') ? ++str : 0;
-	while (isvalid(*str, str_base))
-		r = r * str_base + value_of(*str++);
-	return (r * sg);
+    while (*str <= 32)
+        str++;
+    int s = (*str == '-') ? -1 : 1;
+    (*str == '-' || *str == '+') ? str++ : 0;
+    int r = 0;
+    while (isbase(*str, str_base) == 1)
+        r = r * str_base + aux(*str++, str_base);
+    return (r *s);
 }
